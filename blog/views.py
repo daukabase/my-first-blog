@@ -3,10 +3,14 @@ from .models import Post
 from .forms import PostForm
 from django.utils import timezone
 from django.shortcuts import redirect
+from django.core.paginator import Paginator
 
 
 def post_list(request):
-    posts = Post.objects.filter(title__contains='spa').order_by('published_date')
+    posts = Post.objects.order_by('published_date')
+    paginator = Paginator(posts, 5)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
     return render(request, 'blog/post_list.html', {'posts': posts})
 
 def post_detail(request, pk):
