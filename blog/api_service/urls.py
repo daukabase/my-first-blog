@@ -4,6 +4,7 @@ from blog.api_service import views
 
 router = routers.DefaultRouter()
 router.register(r'/posts', views.PostViewSet)
+router.register(r'/posts/ordered', views.OrderedPostViewSet)
 
 
 urlpatterns = [
